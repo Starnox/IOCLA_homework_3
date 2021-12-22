@@ -14,9 +14,9 @@ TOTAL=0
 
 make copy > /dev/null 2>&1 && make > /dev/null 2>&1
 
-echo "============= 64 bits bonus task =============="
+echo "=============== AT&T bonus task ==============="
 
-for i in 1 2 3; do
+for i in 1 2 3 ; do
 	./checker < "${INPUTS}${i}${IN_EXT}" > "${OUTPUTS}${i}${OUT_EXT}"
 	diff "${OUTPUTS}${i}${OUT_EXT}" "${REFS}${i}${REF_EXT}" > /dev/null
 	if [[ $? == "0" ]]; then
@@ -40,4 +40,4 @@ printf "Total score:				%02dp/%02dp\n" ${TOTAL} ${MAX_SCORE}
 
 make clean > /dev/null 2>&1
 
-echo "bonus_64bits:${TOTAL}" >> ../../.results
+echo "bonus_at&t:${TOTAL}" >> ../../.results
