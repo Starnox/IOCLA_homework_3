@@ -2,9 +2,6 @@ global get_words
 global compare_func
 global sort
 
-section .data
-    delimiter db " _.,!?", 0
-
 section .text
     extern qsort
     extern strlen 
@@ -96,14 +93,21 @@ sort:
 get_words:
     enter 0, 0
 
-    mov eax, delimiter
+    ;; crate a local variable that holds the delimiter string " .,_"
+    sub esp, 8
+    mov dword [ebp - 8], 741236512
+    mov dword [ebp - 4], 0
+    lea eax, [ebp - 8]
+
+    ;; push the arguments and call strtok
     push eax
     push dword [ebp + 8]
-
     call strtok
     add esp, 8
 
     ;; edx will hold the index of the curernt word in **words
+
+    ;; intialisation
     mov ecx, eax
     xor edi, edi
     jmp verification
@@ -130,7 +134,8 @@ loop_get_words:
 
 
     ;; token = strtok(NULL, delimiter)
-    push delimiter
+    lea eax, [ebp - 8]
+    push eax
     push 0
     call strtok
     add esp, 8
@@ -147,6 +152,8 @@ verification:
 
     mov byte[edx + eax], byte 0
     mov dword [ebx], edx
+
+    add esp, 8
 
     leave
     ret
