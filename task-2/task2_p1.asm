@@ -5,20 +5,6 @@ section .text
 ;
 ;; calculate least common multiple fow 2 numbers, a and b
 
-gcd:
-	pop ecx
-	pop eax
-	pop ebx
-
-
-	push ebx
-	push eax
-	push ecx
-
-
-	leave
-	ret
-
 cmmmc:
 	;; get the parameters by popping
 	pop ecx ; [esp]
@@ -30,13 +16,6 @@ cmmmc:
 	push ebx
 	push eax
 	push ecx
-
-	;; set argumets for gcd
-	; push ebx
-	; push eax
-	; call gcd
-	; pop eax
-	; pop ebx
 
 	push ebx
 	push eax
